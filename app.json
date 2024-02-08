@@ -32,8 +32,9 @@
     "plugins": [
       "expo-router"
     ],
-    "experiments": {
-      "typedRoutes": true
+    "experiments":{
+      "typesRoute":true,
+      "tsconfig":true
     }
   }
 }
