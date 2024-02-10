@@ -1,20 +1,29 @@
 import { StyleSheet, Text, View, Image ,Pressable} from "react-native";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import products from "@assets/data/products";
 import { defaultPizzaimage } from "@/components/ProductListItem";
 import { useState } from "react";
 import Button from "@/components/Button";
+import { useCart } from "@/Provider/CartProvider";
+import { PizzaSize } from "@/types";
 
-const sizes = ["S", "M", "L", "XL"];
+const sizes:PizzaSize[] = ["S", "M", "L", "XL"];
 
 const ProductDetailsScreen = () => {
   const { id } = useLocalSearchParams();
+  const {addItem} =useCart()
 
-  const [selectedSize, setSlectedSize] = useState("M");
+  const router = useRouter();
+
+  const [selectedSize, setSlectedSize] = useState<PizzaSize>("M");
 
   const addToCart=()=>{
-    console.warn("item has been added in cart",selectedSize)
-  }
+    if(!product){
+      return
+    }
+    addItem(product,selectedSize);
+    router.push('/cart')
+  };
 
   const product = products.find((p) => p.id.toString() === id);
   if (!product) {
@@ -50,6 +59,7 @@ const ProductDetailsScreen = () => {
         ))}
       </View>
       <Text style={styles.price}>${product.price}</Text>
+
       <Button onPress={addToCart} text=" Add to Cart"/>
     </View>
   );
@@ -68,6 +78,7 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 18,
     fontWeight: "bold",
+    marginTop:'auto'
   },
   sizes: {
     flexDirection: "row",
