@@ -11,7 +11,7 @@ function Signin() {
   
   const signInWithAuth=()=>{
        SetLoading(true)
-       if(error) Alert.alert(error.message);
+    //    if(error) Alert.alert(error.message);
        SetLoading(false)
        
   }
@@ -19,7 +19,7 @@ function Signin() {
   return (
     <View style={styles.container}>
         <Stack.Screen options={{title:"Sign In "}} />
-        
+
       <Text style={styles.label}>Name</Text>
       <TextInput
         value={name}
