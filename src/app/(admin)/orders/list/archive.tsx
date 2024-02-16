@@ -10,7 +10,7 @@ export default function OrderScreen() {
       data={orders}
       renderItem={({item})=><OrderListItem order ={item}/>}
      />
-    </View>
+    </View> 
   )
 }
 
